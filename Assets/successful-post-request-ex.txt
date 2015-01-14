@@ -1,0 +1,78 @@
+INFO     2015-01-13 20:14:08,673 module.py:718] default: "GET /upload-page-test HTTP/1.1" 200 330
+INFO     2015-01-13 20:15:10,852 module.py:718] default: "POST /api/levels HTTP/1.1" 302 -
+INFO     2015-01-13 20:15:10,869 module.py:718] default: "GET /api/levels/qTxbR1Jv_buyAe9c2TvFZg%3D%3D HTTP/1.1" 200 121707
+
+INFO     2015-01-13 20:17:08,993 module.py:718] default: "GET /api/levels/-EsLHlQv43iWKsGDPd-nRQ%3D%3D HTTP/1.1" 200 17
+ERROR    2015-01-14 04:17:09,134 webapp2.py:1552] list index out of range
+
+Traceback (most recent call last):
+
+  File "C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2.py", line 1535, in __call__
+
+    rv = self.handle_exception(request, response, e)
+
+  File "C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2.py", line 1529, in __call__
+
+    rv = self.router.dispatch(request, response)
+
+  File "C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2.py", line 1278, in default_dispatcher
+
+    return route.handler_adapter(request, response)
+
+  File "C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2.py", line 1102, in __call__
+
+    return handler.dispatch()
+
+  File "C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2.py", line 572, in dispatch
+
+    return self.handle_exception(e, self.app.debug)
+
+  File "C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2.py", line 570, in dispatch
+
+    return method(*args, **kwargs)
+
+  File "C:\Users\mlean\Documents\Projects\artf-game-server\main.py", line 29, in post
+
+    blob_info = upload_files[0]
+
+IndexError: list index out of range
+
+INFO     2015-01-13 20:17:09,134 module.py:718] default: "POST /api/levels/ HTTP/1.1" 500 1640
+
+
+INFO     2015-01-13 20:21:18,729 module.py:718] default: "GET /api/levels/-EsLHlQv43iWKsGDPd-nRQ%3D%3D HTTP/1.1" 200 17
+ERROR    2015-01-14 04:21:21,444 webapp2.py:1552] list index out of range
+
+Traceback (most recent call last):
+
+  File "C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2.py", line 1535, in __call__
+
+    rv = self.handle_exception(request, response, e)
+
+  File "C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2.py", line 1529, in __call__
+
+    rv = self.router.dispatch(request, response)
+
+  File "C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2.py", line 1278, in default_dispatcher
+
+    return route.handler_adapter(request, response)
+
+  File "C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2.py", line 1102, in __call__
+
+    return handler.dispatch()
+
+  File "C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2.py", line 572, in dispatch
+
+    return self.handle_exception(e, self.app.debug)
+
+  File "C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2.py", line 570, in dispatch
+
+    return method(*args, **kwargs)
+
+  File "C:\Users\mlean\Documents\Projects\artf-game-server\main.py", line 26, in post
+
+    blob_info = upload_files[0]
+
+IndexError: list index out of range
+
+INFO     2015-01-13 20:21:21,444 module.py:718] default: "POST /api/levels/ HTTP/1.1" 500 1640
