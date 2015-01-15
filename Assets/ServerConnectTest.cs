@@ -4,6 +4,8 @@ using System;
 
 public class ServerConnectTest : MonoBehaviour {
 	public WWW ulFile;
+	public OutputText outputfield;
+
 	IEnumerator Start () {
 		/*
 		//Setup level upload example 1
@@ -32,8 +34,9 @@ public class ServerConnectTest : MonoBehaviour {
 		*/
 
 		//Do the API GET request at /api/levels/levelId to download the level from the server
-		WWW www = new WWW("http://localhost:8080/api/levels/5785905063264256");
-		yield return www;
-		Debug.Log(www.text);
+		WWW download = new WWW("http://localhost:8080/api/levels/5785905063264256");
+		yield return download;
+		outputfield.ChangeText(download.text);
+		Debug.Log(download.text);
 	}
 }
