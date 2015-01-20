@@ -2,19 +2,14 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class OutputText : MonoBehaviour {
-	public InputField test;
+public class DLOutputText : MonoBehaviour {
+	public InputField field;
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
+		field.text = "No level data downloaded";
 	}
 
 	public void ChangeText(string input) {
-		test.text = input;
+		field.text = input;
 	}
 }
