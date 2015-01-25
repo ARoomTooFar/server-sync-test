@@ -68,7 +68,12 @@ public class ServerConnectTest : MonoBehaviour {
 		}
 		*/
 
+		//Download level data example
 		string levelData = serverConnect.getLevel("5629499534213120");
+		
+		//Generate error for attempting to download a level that doesn't exist
+		//string levelData = serverConnect.getLevel("123123123");
+
 		Debug.Log(levelData);
 		dlOutputField.ChangeText(levelData);
 	}

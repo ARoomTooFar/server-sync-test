@@ -20,11 +20,11 @@ public class ARTFGS : MonoBehaviour {
 		//WWW www = new WWW("https://artf-gs.appspot.com/api/levels/" + levelId);
 		StartCoroutine(httpRequest(www));
 		while(www.isDone == false) {
-			Debug.Log("HTTP request in progress...");
+			//Debug.Log("HTTP request in progress...");
 		}
 
-		if(www.data == "ERROR: Level does not exist")
-			return null;
+		if(www.text == "")
+			return "ERROR: LEVEL DATA DOWNLOAD FAILED";	
 		else
 			return www.text;
 	}
@@ -33,9 +33,9 @@ public class ARTFGS : MonoBehaviour {
 		yield return www;
 
 		if (www.error == null) {
-			Debug.Log("WWW OK: " + www.url);
+			Debug.Log("WWW SUCCESS: " + www.url);
 		} else {
-			Debug.Log("WWW ERROR");
+			Debug.Log("WWW ERROR: " + www.error);
 		}
 	}
 }
