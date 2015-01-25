@@ -3,22 +3,25 @@ using System.Collections;
 using System;
 
 public class ServerConnectTest : MonoBehaviour {
+	public ARTFGS serverConnect;
 	public DLOutputText dlOutputField;
 	public ULOutputText ulOutputField;
 
-	IEnumerator Start () {
+	void Start () {
+		/*
 		//Do the API GET request at /api/levels/levelId to download the level from the server
-		WWW downloadedData = new WWW("https://artf-gs.appspot.com/api/levels/5629499534213120");
+		WWW downloadedData = new WWW("http://localhost:8080/api/levels/5629499534213120");
 		yield return downloadedData;
 		dlOutputField.ChangeText(downloadedData.text);
 		Debug.Log(downloadedData.text);
+		*/
 
 		/*
 		//Generate error for trying to download a level that doesn't exist
-		WWW download = new WWW("https://artf-gs.appspot.com/api/levels/1337");
-		yield return download;
-		dlOutputField.ChangeText(download.text);
-		Debug.Log(download.text);
+		WWW downloadedData = new WWW("https://artf-gs.appspot.com/api/levels/1337");
+		yield return downloadedData;
+		dlOutputField.ChangeText(downloadedData.text);
+		Debug.Log(downloadedData.text);
 		*/
 
 		/*
@@ -46,7 +49,7 @@ public class ServerConnectTest : MonoBehaviour {
 
 		/*
 		//Do the API POST request at /api/levels to upload to the server
-		WWW uploadedData = new WWW ("https://artf-gs.appspot.com/api/levels/", postForm);
+		WWW uploadedData = new WWW ("http://localhost:8080/api/levels/", postForm);
 		*/
 
 		/*
@@ -64,5 +67,9 @@ public class ServerConnectTest : MonoBehaviour {
 			ulOutputField.ChangeText(uploadedData.error);
 		}
 		*/
+
+		string levelData = serverConnect.getLevel("5629499534213120");
+		Debug.Log(levelData);
+		dlOutputField.ChangeText(levelData);
 	}
 }
