@@ -2,40 +2,48 @@
 using System.Collections;
 
 public class ARTFGS : MonoBehaviour {
-	/*
-	// Use this for initialization
-	void Start () {
-		Debug.Log("ARTFGS object started");
-	}
-	*/
-	
-	/*
-	// Update is called once per frame
-	void Update () {
-	
-	}*/
+	const string SERVERURI = "http://localhost:8080/"; //local server
+	//const string SERVERURI = "https://artf-gs.appspot.com/"; //live server
+	const string LEVELPATH = "api/levels/";
 
 	public string getLevel(string levelId) {
-		WWW www = new WWW("http://localhost:8080/api/levels/" + levelId);
-		//WWW www = new WWW("https://artf-gs.appspot.com/api/levels/" + levelId);
+		//Connect to local server
+		WWW www = new WWW(SERVERURI + LEVELPATH + levelId);
+
 		StartCoroutine(httpRequest(www));
 		while(www.isDone == false) {
 			//Debug.Log("HTTP request in progress...");
 		}
 
-		if(www.text == "")
-			return "ERROR: LEVEL DATA DOWNLOAD FAILED";	
-		else
-			return www.text;
+		return www.text;
+	}
+
+	public string sendNewLevel(int userId, string levelName, string liveLevelData = "", string draftLevelData = "") {
+		WWWForm form = new WWWForm();
+		form.AddField ("user_id", userId);
+		form.AddField ("level_name", levelName);
+
+		if(liveLevelData != "")
+			form.AddField ("live_level_data", liveLevelData);
+		if(draftLevelData != "")
+			form.AddField ("draft_level_data", draftLevelData);
+
+		WWW www = new WWW(SERVERURI + LEVELPATH, form);
+		StartCoroutine(httpRequest(www));
+		while(www.isDone == false) {
+			//Debug.Log("HTTP request in progress...");
+		}
+
+		return www.text;
 	}
 
 	IEnumerator httpRequest(WWW www) {
 		yield return www;
 
-		if (www.error == null) {
+		/*if (www.error == null) {
 			Debug.Log("WWW SUCCESS: " + www.url);
 		} else {
 			Debug.Log("WWW ERROR: " + www.error);
-		}
+		}*/
 	}
 }

@@ -68,13 +68,24 @@ public class ServerConnectTest : MonoBehaviour {
 		}
 		*/
 
-		//Download level data example
-		string levelData = serverConnect.getLevel("5629499534213120");
+		/* Download level data example */
+		string dlLevelData = serverConnect.getLevel("6093630880088064");
 		
 		//Generate error for attempting to download a level that doesn't exist
 		//string levelData = serverConnect.getLevel("123123123");
 
-		Debug.Log(levelData);
-		dlOutputField.ChangeText(levelData);
+		Debug.Log(dlLevelData);
+		if(dlLevelData == "")
+			dlOutputField.ChangeText("ERROR: LEVEL DATA DOWNLOAD FAILED");
+		else
+			dlOutputField.ChangeText(dlLevelData);
+
+		/* Upload level data example */
+		/*string ulLevelData = serverConnect.sendNewLevel(456, "Level Name Test", "livedatatest", "draftdatatest");
+		Debug.Log(ulLevelData);
+		if(dlLevelData == "")
+			ulOutputField.ChangeText("ERROR: LEVEL DATA UPLOAD FAILED");
+		else
+			ulOutputField.ChangeText(ulLevelData);*/
 	}
 }
