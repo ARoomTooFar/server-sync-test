@@ -3,11 +3,12 @@ using System.Collections;
 using System;
 
 public class ServerConnectTest : MonoBehaviour {
-	public ARTFGS serverConnect;
+	private ARTFGS serverConnect;
 	public DLOutputText dlOutputField;
 	public ULOutputText ulOutputField;
 
 	void Start () {
+		serverConnect = gameObject.AddComponent<ARTFGS> ();
 		/*
 		//Do the API GET request at /api/levels/levelId to download the level from the server
 		WWW downloadedData = new WWW("http://localhost:8080/api/levels/5629499534213120");
@@ -87,5 +88,6 @@ public class ServerConnectTest : MonoBehaviour {
 			ulOutputField.ChangeText("ERROR: LEVEL DATA UPLOAD FAILED");
 		else
 			ulOutputField.ChangeText(ulLevelData);*/
+
 	}
 }
