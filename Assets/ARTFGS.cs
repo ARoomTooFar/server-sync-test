@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class ARTFGS : MonoBehaviour {
-	const string SERVERURI = "http://localhost:8080/"; //local server
-	//const string SERVERURI = "https://artf-gs.appspot.com/"; //live server
+	const string SERVERURI = "http://localhost:8081/"; //local server
+	//const string SERVERURI = "https://api-dot-artf-server.appspot.com/"; //live server
 	const string LEVELPATH = "api/levels/";
 
 	public string getLevel(string levelId) {
