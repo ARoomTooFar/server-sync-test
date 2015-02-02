@@ -60,6 +60,20 @@ public class ARTFGS : MonoBehaviour {
 		return www.text;
 	}
 
+	public string deleteLevel(string levelId) {
+		WWWForm form = new WWWForm();
+		form.AddField ("flag", "delete");
+		form.AddField ("level_id", levelId);
+		
+		WWW www = new WWW(SERVERURI + LEVELPATH + levelId, form);
+		StartCoroutine(httpRequest(www));
+		while(www.isDone == false) {
+			//Debug.Log("HTTP request in progress...");
+		}
+		
+		return www.text;
+	}
+
 	IEnumerator httpRequest(WWW www) {
 		yield return www;
 

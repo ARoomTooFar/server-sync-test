@@ -44,5 +44,9 @@ public class ServerConnectTest : MonoBehaviour {
 		/* Update level data example */
 		/*string udLevelData = serverConnect.updateLevel("5066549580791808", "369", "Level Name Test Updated", "", "");
 		Debug.Log(udLevelData);*/
+
+		/* Delete level data example */
+		/*string delLevelData = serverConnect.deleteLevel("5629499534213120");
+		Debug.Log(delLevelData);*/
 	}
 }
