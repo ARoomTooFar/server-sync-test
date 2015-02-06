@@ -3,12 +3,12 @@ using System.Collections;
 using System;
 
 public class ServerConnectTest : MonoBehaviour {
-	private ARTFGS serverConnect;
+	private Farts serverConnect;
 	public DLOutputText dlOutputField;
 	public ULOutputText ulOutputField;
 
 	void Start () {
-		serverConnect = gameObject.AddComponent<ARTFGS>();
+		serverConnect = gameObject.AddComponent<Farts>();
 
 		/* Download level data example 1 */
 		//string dlLevelData = serverConnect.getLevel("5629499534213120");
