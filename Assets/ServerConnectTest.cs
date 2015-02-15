@@ -3,50 +3,35 @@ using System.Collections;
 using System;
 
 public class ServerConnectTest : MonoBehaviour {
-	private Farts serverConnect;
+	private Farts farts;
 	public DLOutputText dlOutputField;
 	public ULOutputText ulOutputField;
 
 	void Start () {
-		serverConnect = gameObject.AddComponent<Farts>();
+		farts = gameObject.AddComponent<Farts>();
 
-		/* Download level data example 1 */
-		//string dlLevelData = serverConnect.getLevel("5629499534213120");
-
-		/* Download level data example 2 */
-		string dlLevelData = serverConnect.getLevel("5066549580791808");
-		
-		//Generate error for attempting to download a level that doesn't exist
-		//string dlLevelData = serverConnect.getLevel("123123123");
-
-		Debug.Log(dlLevelData);
-		if(dlLevelData == "")
+		/* Download level data example */
+		string dlLvlData = farts.getLevel("5328783104016384");
+		Debug.Log("dlLvlData: " + dlLvlData);
+		if(dlLvlData == "")
 			dlOutputField.ChangeText("ERROR: LEVEL DATA DOWNLOAD FAILED");
 		else
-			dlOutputField.ChangeText(dlLevelData);
+			dlOutputField.ChangeText(dlLvlData);
 
-		/* Upload level data example 1 */
-		/*string ulLevelData = serverConnect.newLevel(456, "Level Name Test", "livedatatest", "draftdatatest");
-		Debug.Log(ulLevelData);
-		if(dlLevelData == "")
+		/* Upload level data example */
+		string ulLvlData = farts.newLevel("Level Name Test", "123", "1337", "livedatatest", "draftdatatest");
+		Debug.Log("ulLvlData: " + ulLvlData);
+		if(dlLvlData == "")
 			ulOutputField.ChangeText("ERROR: LEVEL DATA UPLOAD FAILED");
 		else
-			ulOutputField.ChangeText(ulLevelData);*/
-
-		/* Upload level data example 2 */
-		/*string ulLevelData = serverConnect.newLevel(123, "A Room Too Butts", "846254datafartshaha125");
-		Debug.Log(ulLevelData);
-		if(dlLevelData == "")
-			ulOutputField.ChangeText("ERROR: LEVEL DATA UPLOAD FAILED");
-		else
-			ulOutputField.ChangeText(ulLevelData);*/
+			ulOutputField.ChangeText(ulLvlData);
 
 		/* Update level data example */
-		/*string udLevelData = serverConnect.updateLevel("5066549580791808", "369", "Level Name Test Updated", "", "");
-		Debug.Log(udLevelData);*/
+		string udLvlData = farts.updateLevel("5610258080727040", "Updated Level Name Test", "456", "adfsdfasdfasf", "jkl;jlkj;klj;");
+		Debug.Log("udLvlData: " + udLvlData);
 
 		/* Delete level data example */
-		/*string delLevelData = serverConnect.deleteLevel("5629499534213120");
-		Debug.Log(delLevelData);*/
+		string delLvlData = farts.deleteLevel("5047308127305728");
+		Debug.Log("delLvlData:" + delLvlData);
 	}
 }
