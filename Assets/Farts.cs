@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class Farts : MonoBehaviour {
-	const string SERVERURI = "http://localhost:8081"; //local server
-	//const string SERVERURI = "https://api-dot-artf-server.appspot.com"; //live server
+	//const string SERVERURI = "http://localhost:8081"; //local server
+	const string SERVERURI = "https://api-dot-artf-server.appspot.com"; //live server
 	const string LEVELPATH = "/levels/";
 	
 	// need to implement cases where level is not found and request timeout
@@ -62,7 +62,7 @@ public class Farts : MonoBehaviour {
 	
 	public string deleteLevel(string lvlId) {
 		WWWForm form = new WWWForm();
-		
+
 		form.AddField ("flag", "delete");
 		form.AddField ("level_id", lvlId);
 		
