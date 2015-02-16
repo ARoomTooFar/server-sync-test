@@ -2,17 +2,25 @@
 using System.Collections;
 
 public class Farts : MonoBehaviour {
-	//const string SERVERURI = "http://localhost:8081"; //local server
-	const string SERVERURI = "https://api-dot-artf-server.appspot.com"; //live server
+	const string SERVERURI = "http://localhost:8081"; //local server
+	//const string SERVERURI = "https://api-dot-artf-server.appspot.com"; //live server
 	const string LEVELPATH = "/levels/";
 	
 	// need to implement cases where level is not found and request timeout
 	public string getLevel(string levelId) {
 		WWW www = new WWW(SERVERURI + LEVELPATH + levelId);
+        float elapsedTime = 0.0f;
+        float cancelTime = 7000f;
 		
 		StartCoroutine(httpRequest(www));
 		while(www.isDone == false) {
-			//Debug.Log("HTTP request in progress...");
+            if (elapsedTime >= cancelTime) {
+                Debug.LogError("ERROR: Request timeout");
+                return "";
+            }
+
+            elapsedTime += Time.deltaTime;
+            //Debug.Log("HTTP request time elapsed: " + elapsedTime);
 		}
 		
 		return www.text;
