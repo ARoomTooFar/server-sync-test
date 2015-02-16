@@ -37,11 +37,10 @@ public class Farts : MonoBehaviour {
         return true;
     }
 	
-	// need to implement cases where level is not found and request timeout
 	public string getLevel(string levelId) {
 		WWW www = new WWW(SERVERURI + LEVELPATH + levelId);
         float elapsedTime = 0.0f;
-        float cancelTime = 7000f;
+        float cancelTime = 10000f;
 		
 		StartCoroutine(httpRequest(www));
 		while(www.isDone == false) {
@@ -58,8 +57,10 @@ public class Farts : MonoBehaviour {
 	}
 	
 	public string newLevel(string lvlName, string gameAcctId, string machId, string liveLvlData="", string draftLvlData="") {
-		WWWForm form = new WWWForm();
-		
+        float elapsedTime = 0.0f;
+        float cancelTime = 10000f;
+        
+        WWWForm form = new WWWForm();
 		form.AddField("level_name", lvlName);
 		form.AddField("game_acct_id", gameAcctId);
 		form.AddField("mach_id", machId);
@@ -69,17 +70,25 @@ public class Farts : MonoBehaviour {
 			form.AddField ("draft_level_data", draftLvlData);
 
 		WWW www = new WWW(SERVERURI + LEVELPATH, form);
+
 		StartCoroutine(httpRequest(www));
-		while(www.isDone == false) {
-			//Debug.Log("HTTP request in progress...");
-		}
+        while (www.isDone == false)
+        {
+            if (elapsedTime >= cancelTime)
+            {
+                Debug.LogError("ERROR: Request timeout");
+                return "";
+            }
+
+            elapsedTime += Time.deltaTime;
+            //Debug.Log("HTTP request time elapsed: " + elapsedTime);
+        }
 		
 		return www.text;
 	}
 
-	public string updateLevel(string lvlId, string lvlName="", string gameAcctId="", string liveLvlData="", string draftLvlData="") {
+	public void updateLevel(string lvlId, string lvlName="", string gameAcctId="", string liveLvlData="", string draftLvlData="") {
 		WWWForm form = new WWWForm();
-
 		form.AddField ("flag", "update");
 		if(lvlName != "")
 			form.AddField ("level_name", lvlName);
@@ -92,24 +101,30 @@ public class Farts : MonoBehaviour {
 		
 		WWW www = new WWW(SERVERURI + LEVELPATH + lvlId, form);
 		StartCoroutine(httpRequest(www));
-		while(www.isDone == false) {
-			//Debug.Log("HTTP request in progress...");
-		}
-		
-		return www.text;
 	}
 	
 	public string deleteLevel(string lvlId) {
-		WWWForm form = new WWWForm();
+        float elapsedTime = 0.0f;
+        float cancelTime = 10000f;
 
+		WWWForm form = new WWWForm();
 		form.AddField ("flag", "delete");
 		form.AddField ("level_id", lvlId);
-		
-		WWW www = new WWW(SERVERURI + LEVELPATH + lvlId, form);
+
+        WWW www = new WWW(SERVERURI + LEVELPATH + lvlId, form);
 		StartCoroutine(httpRequest(www));
-		while(www.isDone == false) {
-			//Debug.Log("HTTP request in progress...");
-		}
+
+        while (www.isDone == false)
+        {
+            if (elapsedTime >= cancelTime)
+            {
+                Debug.LogError("ERROR: Request timeout");
+                return "";
+            }
+
+            elapsedTime += Time.deltaTime;
+            //Debug.Log("HTTP request time elapsed: " + elapsedTime);
+        }
 		
 		return www.text;
 	}
@@ -117,10 +132,10 @@ public class Farts : MonoBehaviour {
 	IEnumerator httpRequest(WWW www) {
 		yield return www;
 		
-		/*if (www.error == null) {
-			Debug.Log("WWW SUCCESS: " + www.url);
+		if (www.error == null) {
+			Debug.Log("WWW SUCCESS: " + www.text);
 		} else {
 			Debug.Log("WWW ERROR: " + www.error);
-		}*/
+		}
 	}
 }

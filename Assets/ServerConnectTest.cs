@@ -12,19 +12,24 @@ public class ServerConnectTest : MonoBehaviour {
 		serv = gameObject.AddComponent<Farts>();
 
 		// Download level example
-        string dlLvlUri = serv.getLvlUri("5100084685438976");
+        string dlLvlUri = serv.getLvlUri("4837301406400512");
         WWW dlLvlReq = new WWW(dlLvlUri);
         yield return dlLvlReq;
 
         // Use the downloaded level data
         string dlLvlData = dlLvlReq.text;
 
-        Debug.Log(dlLvlData);
-
         if (serv.dataCheck(dlLvlData))
+        {
+            Debug.Log(dlLvlData);
             dlOutputField.ChangeText(dlLvlData);
+        } 
         else
+        {
+            Debug.Log("ERROR: LEVEL DATA DOWNLOAD FAILED");
             dlOutputField.ChangeText("ERROR: LEVEL DATA DOWNLOAD FAILED");
+        }
+
 
         // Upload level example
         Hashtable newLvlReq = serv.newLvlUri("Level Name Test", "123", "1337", "livedatatest", "draftdatatest");
@@ -34,14 +39,22 @@ public class ServerConnectTest : MonoBehaviour {
         WWW ulLvlReq = new WWW(ulLvlUri, ulLvlForm);
         yield return ulLvlReq;
 
-        // Use the uploaded level data
+        // Use the returned data
         string ulLvlId = ulLvlReq.text;
 
-        Debug.Log(ulLvlId);
-
         if (serv.dataCheck(ulLvlId))
+        {
+            Debug.Log(ulLvlId);
             ulOutputField.ChangeText(ulLvlId);
+        }
         else
+        {
+            Debug.Log("ERROR: LEVEL DATA UPLOAD FAILED");
             ulOutputField.ChangeText("ERROR: LEVEL DATA UPLOAD FAILED");
+        }
+
+
+        // Update level example
+        serv.updateLevel("4837301406400512", "Updated Level Name Test", "456", "adfsdfasdfasf", "jkl;jlkj;klj;");
 	}
 }
