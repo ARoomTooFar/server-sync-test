@@ -5,6 +5,37 @@ public class Farts : MonoBehaviour {
 	const string SERVERURI = "http://localhost:8081"; //local server
 	//const string SERVERURI = "https://api-dot-artf-server.appspot.com"; //live server
 	const string LEVELPATH = "/levels/";
+
+    public string getLvlUri(string levelId)
+    {
+        return SERVERURI + LEVELPATH + levelId;
+    }
+
+    public Hashtable newLvlUri(string lvlName, string gameAcctId, string machId, string liveLvlData = "", string draftLvlData = "")
+    {
+        string uri = SERVERURI + LEVELPATH;
+
+        WWWForm form = new WWWForm();
+        form.AddField("level_name", lvlName);
+        form.AddField("game_acct_id", gameAcctId);
+        form.AddField("mach_id", machId);
+        if (liveLvlData != "")
+            form.AddField("live_level_data", liveLvlData);
+        if (draftLvlData != "")
+            form.AddField("draft_level_data", draftLvlData);
+
+        Hashtable newLvlReq = new Hashtable();
+        newLvlReq.Add("uri", uri);
+        newLvlReq.Add("form", form);
+
+        return newLvlReq;
+    }
+
+    // Checks if returned data is valid or not. Returns true if the data is valid, false otherwise.
+    public bool dataCheck(string input) {
+        if (input == "") return false;
+        return true;
+    }
 	
 	// need to implement cases where level is not found and request timeout
 	public string getLevel(string levelId) {
