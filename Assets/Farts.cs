@@ -6,6 +6,7 @@ public class Farts : MonoBehaviour {
 	//const string SERVERURI = "https://api-dot-artf-server.appspot.com"; //live server
 	const string LEVELPATH = "/levels/";
     const float cancelTime = 10000f;
+    delegate void CallbackDelegate(float strength);
 
     public WWW getLvlWww(string levelId)
     {
@@ -83,7 +84,7 @@ public class Farts : MonoBehaviour {
 		return www.text;
 	}
 
-	public void updateLevel(string lvlId, string lvlName="", string gameAcctId="", string liveLvlData="", string draftLvlData="") {
+	public WWW updateLevel(string lvlId, string lvlName="", string gameAcctId="", string liveLvlData="", string draftLvlData="") {
 		WWWForm form = new WWWForm();
 		form.AddField ("flag", "update");
 		if(lvlName != "")
@@ -97,6 +98,8 @@ public class Farts : MonoBehaviour {
 		
 		WWW www = new WWW(SERVERURI + LEVELPATH + lvlId, form);
 		StartCoroutine(httpRequest(www));
+
+        return www;
 	}
 	
 	public string deleteLevel(string lvlId) {
@@ -128,9 +131,9 @@ public class Farts : MonoBehaviour {
 		yield return www;
 		
 		if (www.error == null) {
-			Debug.Log("WWW SUCCESS: " + www.text);
+			Debug.Log("COROUTINE WWW SUCCESS: " + www.text);
 		} else {
-			Debug.Log("WWW ERROR: " + www.error);
+            Debug.Log("COROUTINE WWW ERROR: " + www.error);
 		}
 	}
 }

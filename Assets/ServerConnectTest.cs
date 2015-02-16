@@ -4,8 +4,10 @@ using System;
 
 public class ServerConnectTest : MonoBehaviour {
 	private Farts serv;
+    private WWW lvlUpdate;
 	public DLOutputText dlOutputField;
 	public ULOutputText ulOutputField;
+    public UDOutputText udOutputField;
 
 
 	IEnumerator Start() {
@@ -30,7 +32,7 @@ public class ServerConnectTest : MonoBehaviour {
         }
 
 
-        // Upload level example
+        /*// Upload level example
         WWW ulLvlReq = serv.newLvlWww("Level Name Test", "123", "1337", "livedatatest", "draftdatatest");
         yield return ulLvlReq;
 
@@ -46,10 +48,21 @@ public class ServerConnectTest : MonoBehaviour {
         {
             Debug.Log("ERROR: LEVEL DATA UPLOAD FAILED");
             ulOutputField.ChangeText("ERROR: LEVEL DATA UPLOAD FAILED");
-        }
+        }*/
 
 
         // Update level example
-        serv.updateLevel("4837301406400512", "Updated Level Name Test", "456", "adfsdfasdfasf", "jkl;jlkj;klj;");
+        lvlUpdate = serv.updateLevel("4837301406400512", "Updated Level Name Test", "456", "adfsdfasdfasf", "jkl;jlkj;klj;");
 	}
+
+
+    void Update() {
+        if (lvlUpdate != null)
+        {
+            if (lvlUpdate.isDone && lvlUpdate.error == null)
+            {
+                udOutputField.ChangeText(lvlUpdate.text);
+            }
+        }
+    }
 }

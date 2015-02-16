@@ -6,7 +6,7 @@ public class ULOutputText : MonoBehaviour {
 	public InputField field;
 	// Use this for initialization
 	void Start () {
-		field.text = "No level data uploaded";
+		field.text = "No level uploaded";
 	}
 	
 	public void ChangeText(string input) {
