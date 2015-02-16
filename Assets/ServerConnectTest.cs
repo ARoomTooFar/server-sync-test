@@ -12,8 +12,7 @@ public class ServerConnectTest : MonoBehaviour {
 		serv = gameObject.AddComponent<Farts>();
 
 		// Download level example
-        string dlLvlUri = serv.getLvlUri("4837301406400512");
-        WWW dlLvlReq = new WWW(dlLvlUri);
+        WWW dlLvlReq = serv.getLvlWww("4837301406400512");
         yield return dlLvlReq;
 
         // Use the downloaded level data
@@ -32,11 +31,7 @@ public class ServerConnectTest : MonoBehaviour {
 
 
         // Upload level example
-        Hashtable newLvlReq = serv.newLvlUri("Level Name Test", "123", "1337", "livedatatest", "draftdatatest");
-        string ulLvlUri = (string)newLvlReq["uri"];
-        WWWForm ulLvlForm = (WWWForm)newLvlReq["form"];
-
-        WWW ulLvlReq = new WWW(ulLvlUri, ulLvlForm);
+        WWW ulLvlReq = serv.newLvlWww("Level Name Test", "123", "1337", "livedatatest", "draftdatatest");
         yield return ulLvlReq;
 
         // Use the returned data

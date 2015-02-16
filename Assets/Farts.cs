@@ -5,16 +5,16 @@ public class Farts : MonoBehaviour {
 	const string SERVERURI = "http://localhost:8081"; //local server
 	//const string SERVERURI = "https://api-dot-artf-server.appspot.com"; //live server
 	const string LEVELPATH = "/levels/";
+    const float cancelTime = 10000f;
 
-    public string getLvlUri(string levelId)
+    public WWW getLvlWww(string levelId)
     {
-        return SERVERURI + LEVELPATH + levelId;
+        WWW www = new WWW(SERVERURI + LEVELPATH + levelId);
+        return www;
     }
 
-    public Hashtable newLvlUri(string lvlName, string gameAcctId, string machId, string liveLvlData = "", string draftLvlData = "")
+    public WWW newLvlWww(string lvlName, string gameAcctId, string machId, string liveLvlData = "", string draftLvlData = "")
     {
-        string uri = SERVERURI + LEVELPATH;
-
         WWWForm form = new WWWForm();
         form.AddField("level_name", lvlName);
         form.AddField("game_acct_id", gameAcctId);
@@ -24,11 +24,9 @@ public class Farts : MonoBehaviour {
         if (draftLvlData != "")
             form.AddField("draft_level_data", draftLvlData);
 
-        Hashtable newLvlReq = new Hashtable();
-        newLvlReq.Add("uri", uri);
-        newLvlReq.Add("form", form);
+        WWW www = new WWW(SERVERURI + LEVELPATH, form);
 
-        return newLvlReq;
+        return www;
     }
 
     // Checks if returned data is valid or not. Returns true if the data is valid, false otherwise.
@@ -40,7 +38,6 @@ public class Farts : MonoBehaviour {
 	public string getLevel(string levelId) {
 		WWW www = new WWW(SERVERURI + LEVELPATH + levelId);
         float elapsedTime = 0.0f;
-        float cancelTime = 10000f;
 		
 		StartCoroutine(httpRequest(www));
 		while(www.isDone == false) {
@@ -58,7 +55,6 @@ public class Farts : MonoBehaviour {
 	
 	public string newLevel(string lvlName, string gameAcctId, string machId, string liveLvlData="", string draftLvlData="") {
         float elapsedTime = 0.0f;
-        float cancelTime = 10000f;
         
         WWWForm form = new WWWForm();
 		form.AddField("level_name", lvlName);
@@ -105,7 +101,6 @@ public class Farts : MonoBehaviour {
 	
 	public string deleteLevel(string lvlId) {
         float elapsedTime = 0.0f;
-        float cancelTime = 10000f;
 
 		WWWForm form = new WWWForm();
 		form.AddField ("flag", "delete");
