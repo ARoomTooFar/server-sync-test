@@ -67,8 +67,8 @@ public class Farts : MonoBehaviour {
 			form.AddField ("draft_level_data", draftLvlData);
 
 		WWW www = new WWW(SERVERURI + LEVELPATH, form);
-
 		StartCoroutine(httpRequest(www));
+
         while (www.isDone == false)
         {
             if (elapsedTime >= cancelTime)
