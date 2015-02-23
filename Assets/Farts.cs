@@ -36,7 +36,7 @@ public class Farts : MonoBehaviour {
         return true;
     }
 	
-	public string getLevel(string levelId) {
+	public string getLvl(string levelId) {
 		WWW www = new WWW(SERVERURI + LEVELPATH + levelId);
         float elapsedTime = 0.0f;
 		
@@ -54,7 +54,7 @@ public class Farts : MonoBehaviour {
 		return www.text;
 	}
 	
-	public string newLevel(string lvlName, string gameAcctId, string machId, string liveLvlData="", string draftLvlData="") {
+	public string newLvl(string lvlName, string gameAcctId, string machId, string liveLvlData="", string draftLvlData="") {
         float elapsedTime = 0.0f;
         
         WWWForm form = new WWWForm();
@@ -84,7 +84,7 @@ public class Farts : MonoBehaviour {
 		return www.text;
 	}
 
-	public WWW updateLevel(string lvlId, string lvlName="", string gameAcctId="", string liveLvlData="", string draftLvlData="") {
+	public WWW updateLvl(string lvlId, string lvlName="", string gameAcctId="", string liveLvlData="", string draftLvlData="") {
 		WWWForm form = new WWWForm();
 		form.AddField ("flag", "update");
 		if(lvlName != "")
@@ -102,7 +102,7 @@ public class Farts : MonoBehaviour {
         return www;
 	}
 	
-	public string deleteLevel(string lvlId) {
+	public string delLvl(string lvlId) {
         float elapsedTime = 0.0f;
 
 		WWWForm form = new WWWForm();
