@@ -6,7 +6,12 @@ public class Farts : MonoBehaviour {
 	//const string SERVERURI = "https://api-dot-artf-server.appspot.com"; //live server
 	const string LEVELPATH = "/levels/";
     const float cancelTime = 10000f;
-    delegate void CallbackDelegate(float strength);
+
+	// Checks if returned data is valid or not. Returns true if the data is valid, false otherwise.
+	public bool dataCheck(string input) {
+		if (input == "") return false;
+		return true;
+	}
 
     public WWW getLvlWww(string levelId)
     {
@@ -27,12 +32,6 @@ public class Farts : MonoBehaviour {
         WWW www = new WWW(SERVERURI + LEVELPATH, form);
 
         return www;
-    }
-
-    // Checks if returned data is valid or not. Returns true if the data is valid, false otherwise.
-    public bool dataCheck(string input) {
-        if (input == "") return false;
-        return true;
     }
 	
 	public string getLvl(string levelId) {

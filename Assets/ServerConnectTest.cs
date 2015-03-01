@@ -10,7 +10,6 @@ public class ServerConnectTest : MonoBehaviour {
     public UDOutputText udOutputField;
     public DELOutputText delOutputField;
 
-
 	IEnumerator Start() {
 		serv = gameObject.AddComponent<Farts>();
 
@@ -34,7 +33,7 @@ public class ServerConnectTest : MonoBehaviour {
 
 
         // Upload level example
-        WWW ulLvlReq = serv.newLvlWww("123", "1337", "livedatatest", "draftdatatest");
+        WWW ulLvlReq = serv.newLvlWww("432", "564", "livedatatest1", "draftdatatest");
         yield return ulLvlReq;
 
         // Use the returned data
@@ -53,10 +52,10 @@ public class ServerConnectTest : MonoBehaviour {
 
 
         // Update level example
-		lvlUpdate = serv.updateLvl("6015428115562496", "456", "adfsdfasdfasf", "jkl;jlkj;klj;");
+		lvlUpdate = serv.updateLvl("6015428115562496", "456", "teehee", "jkl;jlkj;klj;");
 
         // Delete level example [WARNING MAY FREEZE WEB PLAYER]
-        /*string delLvlId = serv.delLvl("6737257499197440");
+		/*string delLvlId = serv.delLvl("6015428115562496");
 
         // Use the returned data
         if (serv.dataCheck(delLvlId))
