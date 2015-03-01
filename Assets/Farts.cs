@@ -14,10 +14,9 @@ public class Farts : MonoBehaviour {
         return www;
     }
 
-    public WWW newLvlWww(string lvlName, string gameAcctId, string machId, string liveLvlData = "", string draftLvlData = "")
+    public WWW newLvlWww(string gameAcctId, string machId, string liveLvlData = "", string draftLvlData = "")
     {
         WWWForm form = new WWWForm();
-        form.AddField("level_name", lvlName);
         form.AddField("game_acct_id", gameAcctId);
         form.AddField("mach_id", machId);
         if (liveLvlData != "")
@@ -54,11 +53,10 @@ public class Farts : MonoBehaviour {
 		return www.text;
 	}
 	
-	public string newLvl(string lvlName, string gameAcctId, string machId, string liveLvlData="", string draftLvlData="") {
+	public string newLvl(string gameAcctId, string machId, string liveLvlData="", string draftLvlData="") {
         float elapsedTime = 0.0f;
         
         WWWForm form = new WWWForm();
-		form.AddField("level_name", lvlName);
 		form.AddField("game_acct_id", gameAcctId);
 		form.AddField("mach_id", machId);
 		if(liveLvlData != "")
@@ -84,11 +82,9 @@ public class Farts : MonoBehaviour {
 		return www.text;
 	}
 
-	public WWW updateLvl(string lvlId, string lvlName="", string gameAcctId="", string liveLvlData="", string draftLvlData="") {
+	public WWW updateLvl(string lvlId, string gameAcctId="", string liveLvlData="", string draftLvlData="") {
 		WWWForm form = new WWWForm();
 		form.AddField ("flag", "update");
-		if(lvlName != "")
-			form.AddField ("level_name", lvlName);
 		if(gameAcctId != "")
 			form.AddField ("game_acct_id", gameAcctId);
 		if(liveLvlData != "")

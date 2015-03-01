@@ -15,7 +15,7 @@ public class ServerConnectTest : MonoBehaviour {
 		serv = gameObject.AddComponent<Farts>();
 
 		// Download level example
-        WWW dlLvlReq = serv.getLvlWww("5785905063264256");
+		WWW dlLvlReq = serv.getLvlWww("6015428115562496");
         yield return dlLvlReq;
 
         // Use the downloaded level data
@@ -34,7 +34,7 @@ public class ServerConnectTest : MonoBehaviour {
 
 
         // Upload level example
-        WWW ulLvlReq = serv.newLvlWww("Level Name Test", "123", "1337", "livedatatest", "draftdatatest");
+        WWW ulLvlReq = serv.newLvlWww("123", "1337", "livedatatest", "draftdatatest");
         yield return ulLvlReq;
 
         // Use the returned data
@@ -53,7 +53,7 @@ public class ServerConnectTest : MonoBehaviour {
 
 
         // Update level example
-        lvlUpdate = serv.updateLvl("5785905063264256", "Updated Level Name Test", "456", "adfsdfasdfasf", "jkl;jlkj;klj;");
+		lvlUpdate = serv.updateLvl("6015428115562496", "456", "adfsdfasdfasf", "jkl;jlkj;klj;");
 
         // Delete level example [WARNING MAY FREEZE WEB PLAYER]
         /*string delLvlId = serv.delLvl("6737257499197440");
