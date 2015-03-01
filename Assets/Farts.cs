@@ -4,8 +4,9 @@ using System.Collections;
 public class Farts : MonoBehaviour {
 	const string SERVERURI = "http://localhost:8081"; //local server
 	//const string SERVERURI = "https://api-dot-artf-server.appspot.com"; //live server
-	const string LEVELPATH = "/levels/";
-    const float cancelTime = 10000f;
+	const string LVLPATH = "/levels/";
+	const string GAMEACCTPATH = "/gameaccount/";
+    const float cancelTime = 50000f;
 
 	// Checks if returned data is valid or not. Returns true if the data is valid, false otherwise.
 	public bool dataCheck(string input) {
@@ -15,7 +16,7 @@ public class Farts : MonoBehaviour {
 
     public WWW getLvlWww(string levelId)
     {
-        WWW www = new WWW(SERVERURI + LEVELPATH + levelId);
+        WWW www = new WWW(SERVERURI + LVLPATH + levelId);
         return www;
     }
 
@@ -29,13 +30,13 @@ public class Farts : MonoBehaviour {
         if (draftLvlData != "")
             form.AddField("draft_level_data", draftLvlData);
 
-        WWW www = new WWW(SERVERURI + LEVELPATH, form);
+        WWW www = new WWW(SERVERURI + LVLPATH, form);
 
         return www;
     }
 	
 	public string getLvl(string levelId) {
-		WWW www = new WWW(SERVERURI + LEVELPATH + levelId);
+		WWW www = new WWW(SERVERURI + LVLPATH + levelId);
         float elapsedTime = 0.0f;
 		
 		StartCoroutine(httpRequest(www));
@@ -63,7 +64,7 @@ public class Farts : MonoBehaviour {
 		if(draftLvlData != "")
 			form.AddField ("draft_level_data", draftLvlData);
 
-		WWW www = new WWW(SERVERURI + LEVELPATH, form);
+		WWW www = new WWW(SERVERURI + LVLPATH, form);
 		StartCoroutine(httpRequest(www));
 
         while (www.isDone == false)
@@ -91,7 +92,7 @@ public class Farts : MonoBehaviour {
 		if(draftLvlData != "")
 			form.AddField ("draft_level_data", draftLvlData);
 		
-		WWW www = new WWW(SERVERURI + LEVELPATH + lvlId, form);
+		WWW www = new WWW(SERVERURI + LVLPATH + lvlId, form);
 		StartCoroutine(httpRequest(www));
 
         return www;
@@ -104,7 +105,7 @@ public class Farts : MonoBehaviour {
 		form.AddField ("flag", "delete");
 		form.AddField ("level_id", lvlId);
 
-        WWW www = new WWW(SERVERURI + LEVELPATH + lvlId, form);
+        WWW www = new WWW(SERVERURI + LVLPATH + lvlId, form);
 		StartCoroutine(httpRequest(www));
 
         while (www.isDone == false)
@@ -118,6 +119,31 @@ public class Farts : MonoBehaviour {
             elapsedTime += Time.deltaTime;
             //Debug.Log("HTTP request time elapsed: " + elapsedTime);
         }
+		
+		return www.text;
+	}
+
+	public string login(string gameAcctName, string gameAcctPass) {
+		float elapsedTime = 0.0f;
+		
+		WWWForm form = new WWWForm();
+		form.AddField ("game_acct_name", gameAcctName);
+		form.AddField ("game_acct_password", gameAcctPass);
+		
+		WWW www = new WWW(SERVERURI + GAMEACCTPATH + "login", form);
+		StartCoroutine(httpRequest(www));
+		
+		while (www.isDone == false)
+		{
+			if (elapsedTime >= cancelTime)
+			{
+				Debug.LogError("ERROR: Request timeout");
+				return "";
+			}
+			
+			elapsedTime += Time.deltaTime;
+			//Debug.Log("HTTP request time elapsed: " + elapsedTime);
+		}
 		
 		return www.text;
 	}

@@ -14,7 +14,7 @@ public class ServerConnectTest : MonoBehaviour {
 		serv = gameObject.AddComponent<Farts>();
 
 		// Download level example
-		WWW dlLvlReq = serv.getLvlWww("6015428115562496");
+		WWW dlLvlReq = serv.getLvlWww("5135818813341696");
         yield return dlLvlReq;
 
         // Use the downloaded level data
@@ -33,7 +33,7 @@ public class ServerConnectTest : MonoBehaviour {
 
 
         // Upload level example
-        WWW ulLvlReq = serv.newLvlWww("432", "564", "livedatatest1", "draftdatatest");
+        /*WWW ulLvlReq = serv.newLvlWww("432", "564", "livedatatest1", "draftdatatest");
         yield return ulLvlReq;
 
         // Use the returned data
@@ -48,11 +48,12 @@ public class ServerConnectTest : MonoBehaviour {
         {
             Debug.Log("ERROR: LEVEL UPLOAD FAILED");
             ulOutputField.ChangeText("ERROR: LEVEL UPLOAD FAILED");
-        }
+        }*/
 
 
         // Update level example
-		lvlUpdate = serv.updateLvl("6015428115562496", "456", "teehee", "jkl;jlkj;klj;");
+		//lvlUpdate = serv.updateLvl("6015428115562496", "456", "teehee", "jkl;jlkj;klj;");
+
 
         // Delete level example [WARNING MAY FREEZE WEB PLAYER]
 		/*string delLvlId = serv.delLvl("6015428115562496");
@@ -68,6 +69,15 @@ public class ServerConnectTest : MonoBehaviour {
             Debug.Log("ERROR: LEVEL DELETE FAILED");
             delOutputField.ChangeText("ERROR: LEVEL DATA DELETE FAILED");
         }*/
+
+
+		// Login example
+		string loginResult = serv.login ("eheh", "eheh");
+		if (serv.dataCheck (loginResult)) {
+			Debug.Log ("Login succeeded: " + loginResult);
+		} else {
+			Debug.Log("Login failed");
+		}
     }
 
 
