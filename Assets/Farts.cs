@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class Farts : MonoBehaviour {
-	const string SERVERURI = "http://localhost:8081"; //local server
-	//const string SERVERURI = "https://api-dot-artf-server.appspot.com"; //live server
+	//const string SERVERURI = "http://localhost:8081"; //local server
+	const string SERVERURI = "https://api-dot-artf-server.appspot.com"; //live server
 	const string LVLPATH = "/levels/";
 	const string GAMEACCTPATH = "/gameaccount/";
     const float cancelTime = 50000f;

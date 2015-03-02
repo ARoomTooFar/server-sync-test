@@ -3,7 +3,8 @@ using System.Collections;
 using System;
 
 public class ServerConnectTest : MonoBehaviour {
-	private Farts serv;
+	private BrowserData browserData;
+    private Farts serv;
     private WWW lvlUpdate;
 	public DLOutputText dlOutputField;
 	public ULOutputText ulOutputField;
@@ -12,9 +13,18 @@ public class ServerConnectTest : MonoBehaviour {
 
 	IEnumerator Start() {
 		serv = gameObject.AddComponent<Farts>();
+        browserData = gameObject.AddComponent<BrowserData>();
+
+        browserData.callBrowserFunction();
+
+        // Get level ID from browser
+        string levelId = browserData.levelId;
+        Debug.Log(levelId);
+
+        levelId = "5684666375864320";
 
 		// Download level example
-		WWW dlLvlReq = serv.getLvlWww("5135818813341696");
+        WWW dlLvlReq = serv.getLvlWww(levelId);
         yield return dlLvlReq;
 
         // Use the downloaded level data
@@ -72,7 +82,7 @@ public class ServerConnectTest : MonoBehaviour {
 
 
 		// Login example
-		string loginResult = serv.login ("eheh", "eheh");
+		string loginResult = serv.login ("admin", "password");
 		if (serv.dataCheck (loginResult)) {
 			Debug.Log ("Login succeeded: " + loginResult);
 		} else {
