@@ -6,7 +6,7 @@ public class Farts : MonoBehaviour
     const string SERVERURI = "http://localhost:8081"; //local server
     //const string SERVERURI = "https://api-dot-artf-server.appspot.com"; //live server
     const string LVLPATH = "/levels/";
-    const string GAMEACCTPATH = "/gameaccount/";
+    const string GAMEACCTPATH = "/gameaccounts/";
     const float timeoutTime = 60f; //HTTP requests timeout after 1 minute
 
     // Checks if returned data is valid or not. Returns true if the data is valid, false otherwise.
