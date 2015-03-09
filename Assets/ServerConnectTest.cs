@@ -15,7 +15,7 @@ public class ServerConnectTest : MonoBehaviour {
 
 
 		// Download level example
-        WWW dlLvlReq = serv.getLvlWww("123123123");
+        WWW dlLvlReq = serv.getLvlWww("6192449487634432");
         yield return dlLvlReq;
 
         // Use the downloaded level data
@@ -23,7 +23,7 @@ public class ServerConnectTest : MonoBehaviour {
 
         if (serv.dataCheck(dlLvlData))
         {
-            Debug.Log(dlLvlData);
+            Debug.Log("Level downloaded: " + dlLvlData);
             dlOutputField.ChangeText(dlLvlData);
         } 
         else
@@ -42,7 +42,7 @@ public class ServerConnectTest : MonoBehaviour {
 
         if (serv.dataCheck(ulLvlId))
         {
-            Debug.Log(ulLvlId);
+            Debug.Log("Level uploaded: " + ulLvlId);
             ulOutputField.ChangeText(ulLvlId);
         }
         else
@@ -62,7 +62,7 @@ public class ServerConnectTest : MonoBehaviour {
         // Use the returned data
         if (serv.dataCheck(delLvlId))
         {
-            Debug.Log(delLvlId);
+            Debug.Log("Level deleted: " + delLvlId);
             delOutputField.ChangeText(delLvlId);
         }
         else
@@ -72,13 +72,25 @@ public class ServerConnectTest : MonoBehaviour {
         }*/
 
 
-		// Login example
-		string loginResult = serv.login ("eheh", "eheh");
+        // Login example [WARNING MAY FREEZE WEB PLAYER]
+		/*string loginResult = serv.login ("spacedandy", "boobies");
 		if (serv.dataCheck (loginResult)) {
 			Debug.Log ("Login succeeded: " + loginResult);
 		} else {
 			Debug.Log("Login failed");
-		}
+		}*/
+
+
+        // Download character example [WARNING MAY FREEZE WEB PLAYER]
+        /*string charGetResult = serv.getChar(loginResult);
+        if (serv.dataCheck(loginResult))
+        {
+            Debug.Log("Character get succeeded: " + charGetResult);
+        }
+        else
+        {
+            Debug.Log("Character get failed");
+        }*/
 
 
         // Update character example [WARNING MAY FREEZE WEB PLAYER]
@@ -102,7 +114,9 @@ public class ServerConnectTest : MonoBehaviour {
         {
             if (lvlUpdate.isDone && lvlUpdate.error == null)
             {
+                Debug.Log("Level updated: " + lvlUpdate.text);
                 udOutputField.ChangeText(lvlUpdate.text);
+                lvlUpdate = null;
             }
             else if (lvlUpdate.error != null)
             {

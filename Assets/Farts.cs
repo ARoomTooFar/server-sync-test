@@ -152,6 +152,26 @@ public class Farts : MonoBehaviour
         return www.text;
     }
 
+    public string getChar(string charId)
+    {
+        WWW www = new WWW(SERVERURI + CHARPATH + charId);
+        StartCoroutine(httpRequest(www));
+
+        float timeStart = Time.realtimeSinceStartup;
+
+        while (!www.isDone)
+        {
+            if (Time.realtimeSinceStartup >= timeStart + timeoutTime)
+            {
+                Debug.LogError("ERROR: Request timeout");
+                return "";
+            }
+            //Debug.Log("HTTP request time elapsed: " + (Time.realtimeSinceStartup - timeStart));
+        }
+
+        return www.text;
+    }
+
     public string updateChar(string charId, string charData)
     {
         WWWForm form = new WWWForm();
