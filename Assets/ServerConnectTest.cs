@@ -13,6 +13,7 @@ public class ServerConnectTest : MonoBehaviour {
 	IEnumerator Start() {
 		serv = gameObject.AddComponent<Farts>();
 
+
 		// Download level example
         WWW dlLvlReq = serv.getLvlWww("123123123");
         yield return dlLvlReq;
@@ -67,7 +68,7 @@ public class ServerConnectTest : MonoBehaviour {
         else
         {
             Debug.Log("ERROR: LEVEL DELETE FAILED");
-            delOutputField.ChangeText("ERROR: LEVEL DATA DELETE FAILED");
+            delOutputField.ChangeText("ERROR: LEVEL DELETE FAILED");
         }*/
 
 
@@ -78,6 +79,20 @@ public class ServerConnectTest : MonoBehaviour {
 		} else {
 			Debug.Log("Login failed");
 		}
+
+
+        // Update character example [WARNING MAY FREEZE WEB PLAYER]
+        /*string charUpdateResult = serv.updateChar("5770237022568448", "huehuhehueheuheuheheu");
+
+        // Use the returned data
+        if (serv.dataCheck(charUpdateResult))
+        {
+            Debug.Log("Character update succeeded: " + charUpdateResult);
+        }
+        else
+        {
+            Debug.Log("Character update failed");
+        }*/
     }
 
 
