@@ -53,7 +53,7 @@ public class ServerConnectTest : MonoBehaviour {
 
 
         // Update level example
-        lvlUpdate = serv.updateLvl("6192449487634432", "456", "teehee", "123123");
+		lvlUpdate = serv.updateLvl("5135818813341696", "456", "teehee", "123123");
 
 
         // Delete level example [WARNING MAY FREEZE WEB PLAYER]
@@ -72,8 +72,21 @@ public class ServerConnectTest : MonoBehaviour {
         }*/
 
 
+		// Register example [WARNING MAY FREEZE WEB PLAYER]
+		/*string registerResult = serv.register ("spacedandy", "boobies", "asdfsafsadfasdf");
+
+		// Use the returned data
+		if (serv.dataCheck (registerResult)) {
+			Debug.Log ("Registration succeeded: " + registerResult);
+		} else {
+			Debug.Log("Registration failed");
+		}*/
+
+
         // Login example [WARNING MAY FREEZE WEB PLAYER]
 		/*string loginResult = serv.login ("spacedandy", "boobies");
+
+		// Use the returned data
 		if (serv.dataCheck (loginResult)) {
 			Debug.Log ("Login succeeded: " + loginResult);
 		} else {
@@ -83,7 +96,9 @@ public class ServerConnectTest : MonoBehaviour {
 
         // Download character example [WARNING MAY FREEZE WEB PLAYER]
         /*string charGetResult = serv.getChar(loginResult);
-        if (serv.dataCheck(loginResult))
+
+		// Use the returned data
+		if (serv.dataCheck(loginResult))
         {
             Debug.Log("Character get succeeded: " + charGetResult);
         }
@@ -114,8 +129,12 @@ public class ServerConnectTest : MonoBehaviour {
         {
             if (lvlUpdate.isDone && lvlUpdate.error == null)
             {
-                Debug.Log("Level updated: " + lvlUpdate.text);
-                udOutputField.ChangeText(lvlUpdate.text);
+				if (serv.dataCheck(lvlUpdate.text)) {
+					Debug.Log("Level updated: " + lvlUpdate.text);
+					udOutputField.ChangeText(lvlUpdate.text);
+				} else {
+					udOutputField.ChangeText("ERROR: LEVEL UPDATE FAILED");
+				}
                 lvlUpdate = null;
             }
             else if (lvlUpdate.error != null)

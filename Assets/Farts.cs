@@ -128,6 +128,31 @@ public class Farts : MonoBehaviour
         return www.text;
     }
 
+	public string register(string gameAcctName, string gameAcctPass, string charData)
+	{
+		WWWForm form = new WWWForm();
+		form.AddField("game_acct_name", gameAcctName);
+		form.AddField("game_acct_password", gameAcctPass);
+		form.AddField("char_data", charData);
+		
+		WWW www = new WWW(SERVERURI + GAMEACCTPATH + "register", form);
+		StartCoroutine(httpRequest(www));
+		
+		float timeStart = Time.realtimeSinceStartup;
+		
+		while (!www.isDone)
+		{
+			if (Time.realtimeSinceStartup >= timeStart + timeoutTime)
+			{
+				Debug.LogError("ERROR: Request timeout");
+				return "";
+			}
+			//Debug.Log("HTTP request time elapsed: " + (Time.realtimeSinceStartup - timeStart));
+		}
+		
+		return www.text;
+	}
+
     public string login(string gameAcctName, string gameAcctPass)
     {
         WWWForm form = new WWWForm();
